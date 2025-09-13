@@ -1,4 +1,5 @@
 // Oriana Betsabé Capurro, tp1, comisión 3
+// https://youtu.be/s9rV8m777mE
 
 // Variables
 let img;
@@ -146,3 +147,4 @@ function mousePressed() {
         }
     }
 }
+
