@@ -1,8 +1,14 @@
-// Variable para saber la pantalla actual
-let pantalla;
-let Imagenes = [];
+let pantalla; // Variable para saber la pantalla actual
+let musica; // Variable para la música
+let click; // Variable para el sonido de clic
+let Imagenes = []; // Arreglo donde se guardan las imágenes del juego
+let musicaIniciada = false; // Variable booleana para controlar la música
 
 function preload() {
+  // Sonidos
+  musica = loadSound("./data/cancion.mp3");
+  click = loadSound("./data/click.mp3");
+  
   // Imágenes
   Imagenes[0] = loadImage("./data/Imagen0.png");
   Imagenes[1] = loadImage("./data/Imagen1.png");
@@ -24,110 +30,112 @@ function preload() {
 
 function setup() {
   createCanvas(640, 480);
-  // Valor inicial de pantalla
+  // Valor inicial de la pantalla
   pantalla = 0;
 } 
 
 function draw() {
   background(137, 206, 140);
   
-  // Mostrar pantalla de inicio
+  // Mostrar la pantalla de inicio
   if (pantalla === 0) {
     mostrarPantallaInicio();
+    // Área del botón:
+    //mostrarBotonRect(540, 0, 100, 100);
   }
   // Pantalla 1
   else if (pantalla === 1) {
     image(Imagenes[1], 0, 0, width, height);
-    // Descomentar para ver el área del botón:
+    // Área del botón:
     //mostrarBotonRect(220, 430, 200, 40);
   }
   // Pantalla 2
   else if (pantalla === 2) {
     image(Imagenes[2], 0, 0, width, height);
-    // Descomentar para ver el área del botón:
+    // Área del botón:
     //mostrarBotonRect(220, 430, 200, 40);
   }
   // Pantalla 3
   else if (pantalla === 3) {
     image(Imagenes[3], 0, 0, width, height);
-    // Descomentar para ver las áreas de los botones:
+    // Área del botón:
     //mostrarBotonRect(60, 430, 240, 40);  // Botón izquierdo
     //mostrarBotonRect(340, 430, 240, 40); // Botón derecho
   }
   // Pantalla 4
   else if (pantalla === 4) {
     image(Imagenes[4], 0, 0, width, height);
-    // Descomentar para ver el área del botón:
+    // Área del botón:
     //mostrarBotonRect(220, 430, 200, 40);
   }
   // Pantalla 5
   else if (pantalla === 5) {
     image(Imagenes[5], 0, 0, width, height);
-    // Descomentar para ver el área del botón:
+    // Área del botón:
     //mostrarBotonRect(220, 430, 200, 40);
   }
   // Pantalla 6
   else if (pantalla === 6) {
     image(Imagenes[6], 0, 0, width, height);
-    // Descomentar para ver el área del botón:
+    // Área del botón:
     //mostrarBotonRect(220, 430, 200, 40);
   }
   //Pantalla 7 (Primer final)
   else if (pantalla === 7) {
     image(Imagenes[7], 0, 0, width, height);
-    // Descomentar para ver las áreas de los botones:
+    // Área del botón:
     //mostrarBotonRect(60, 430, 240, 40);  // Botón izquierdo
     //mostrarBotonRect(340, 430, 240, 40); // Botón derecho
   }
   // Pantalla 8
   else if (pantalla === 8) {
     image(Imagenes[8], 0, 0, width, height);
-    // Descomentar para ver las áreas de los botones:
+    // Área del botón:
     //mostrarBotonRect(60, 430, 240, 40);  // Botón izquierdo
     //mostrarBotonRect(340, 430, 240, 40); // Botón derecho
   }
   // Pantalla 9
   else if (pantalla === 9) {
     image(Imagenes[9], 0, 0, width, height);
-    // Descomentar para ver el área del botón:
+    // Área del botón:
     //mostrarBotonRect(220, 430, 200, 40);
   }
   // Pantalla 10
   else if (pantalla === 10) {
     image(Imagenes[10], 0, 0, width, height);
-    // Descomentar para ver el área del botón:
+    // Área del botón:
     //mostrarBotonRect(220, 430, 200, 40);
   }
   // Pantalla 11 (Segundo final)
   else if (pantalla === 11) {
     image(Imagenes[11], 0, 0, width, height);
-    // Descomentar para ver las áreas de los botones:
+    // Área del botón:
     //mostrarBotonRect(60, 430, 240, 40);  // Botón izquierdo
     //mostrarBotonRect(340, 430, 240, 40); // Botón derecho
   }
   // Pantalla 12
   else if (pantalla === 12) {
     image(Imagenes[12], 0, 0, width, height);
-    // Descomentar para ver el área del botón:
+    // Área del botón:
     //mostrarBotonRect(220, 430, 200, 40);
   }
   // Pantalla 13
   else if (pantalla === 13) {
     image(Imagenes[13], 0, 0, width, height);
-    // Descomentar para ver el área del botón:
+    // Área del botón:
     //mostrarBotonRect(220, 430, 200, 40);
   }
   // Pantalla 14 (Tercer final)
   else if (pantalla === 14) {
     image(Imagenes[14], 0, 0, width, height);
-    // Descomentar para ver las áreas de los botones:
+    // Área del botón:
     //mostrarBotonRect(60, 430, 240, 40);  // Botón izquierdo
     //mostrarBotonRect(340, 430, 240, 40); // Botón derecho
   }
   // Pantalla 15 (Créditos)
   else if (pantalla === 15) {
     image(Imagenes[15], 0, 0, width, height);
-    // Descomentar para ver el área del botón:
+    // Área del botón:
     //mostrarBotonRect(220, 430, 200, 40);
   }
 }
@@ -148,6 +156,28 @@ function mostrarBotonRect(x_, y_, ancho_, alto_) {
 }
 
 function mousePressed() {
+  click.play();
+  
+  // Botón de música
+  if (pantalla === 0) {
+    if (mouseX > 540 && mouseX < 640 && mouseY > 0 && mouseY < 100) {
+      if (musica.isPlaying()) {
+        // Si está la música, pausarla
+        musica.pause();
+      } else {
+        // Si está pausada, reproducirla
+        if (!musicaIniciada) {
+          musica.setVolume(0.2);
+          musica.loop();
+          musicaIniciada = true;
+        } else {
+          musica.play();
+        }
+      }
+      return; // Salir para no activar el botón de comenzar juego
+    }
+  }
+  
   // Pantalla 0: Botón para ir a pantalla 1
   if (pantalla === 0) { 
     let distancia = dist(mouseX, mouseY, 320, 420);
@@ -169,11 +199,11 @@ function mousePressed() {
   }
   // Pantalla 3: Dos botones para las dos opciones
   else if (pantalla === 3) {
-    // Botón izquierdo: "INTENTAR CORTEJAR"
+    // Botón izquierdo: "intentar cortejar"
     if (mouseX > 60 && mouseX < 300 && mouseY > 430 && mouseY < 470) {
       pantalla = 4;
     }
-    // Botón derecho: "PERSEGUIRLA"
+    // Botón derecho: "Perseguirla"
     else if (mouseX > 340 && mouseX < 580 && mouseY > 430 && mouseY < 470) {
       pantalla = 8;
     }
