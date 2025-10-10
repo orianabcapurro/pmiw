@@ -1,3 +1,6 @@
+// Fiorella Celi, Oriana Betsabé Capurro, comision 3 
+// https://www.youtube.com/watch?v=q6dpdxyF0Fc
+
 let pantalla; // Variable para saber la pantalla actual
 let musica; // Variable para la música
 let click; // Variable para el sonido de clic
@@ -308,3 +311,4 @@ function mostrarPantallaInicio() {
   image(Imagenes[0], 0, 0, width, height);
   pop();
 }
+
